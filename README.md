@@ -399,3 +399,85 @@ En lugar de enviar todos los campos de la Entity.
 **Idea principal:**
 
 > La Entity representa los datos de la base de datos, mientras que el DTO define los datos que queremos **transferir**.
+
+# Relación entre conceptos
+
+```text
+                         PETICIÓN HTTP
+                              │
+                              ▼
+                    ┌─────────────────┐
+                    │    Controller   │
+                    │ @RestController │
+                    └────────┬────────┘
+                             │
+                             │ DTO
+                             ▼
+                    ┌─────────────────┐
+                    │     Service     │
+                    │   @Service      │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │   Repository    │
+                    │ JpaRepository   │
+                    └────────┬────────┘
+                             │
+                             ▼
+                         JPA
+                             │
+                             ▼
+                       Hibernate
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │   Base de Datos │
+                    │                 │
+                    │  ┌───────────┐  │
+                    │  │  EMPLOYEE │  │
+                    │  └───────────┘  │
+                    └────────┬────────┘
+                             │
+                             │
+                       representa
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │     Entity      │
+                    │    Employee     │
+                    │                 │
+                    │ @Entity         │
+                    │ @Table          │
+                    │ @Column         │
+                    └─────────────────┘
+```
+
+## Resumen de cada concepto
+
+```text
+Controller
+→ Recibe las peticiones HTTP.
+
+DTO
+→ Transporta únicamente los datos necesarios.
+
+Service
+→ Contiene la lógica de negocio.
+
+Repository
+→ Se encarga del acceso a los datos.
+
+JPA
+→ Define la especificación para trabajar con persistencia.
+
+Hibernate
+→ Implementa JPA y realiza la comunicación con la DB.
+
+Entity
+→ Representa los datos que se almacenan en la DB.
+
+@Table / @Column
+→ Indican qué tabla y columnas representan los atributos de la Entity.
+```
+
