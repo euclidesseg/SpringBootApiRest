@@ -317,3 +317,85 @@ customerRepository.findById(1L);
 **Idea principal:**
 
 > El Repository se encarga de **cómo acceder a los datos**.
+
+# Entity
+
+Una **Entity (entidad)** es una clase Java que representa una **entidad de la base de datos**, normalmente asociada a una tabla.
+
+```text
+Clase Java Employee
+        ↓
+@Table(name = "employees")
+        ↓
+Tabla EMPLOYEES
+```
+
+Se utiliza la anotación `@Entity` para indicarle a JPA que la clase será persistida en la base de datos.
+
+`@Table` permite indicar explícitamente el **nombre real de la tabla** en la base de datos.
+
+```java
+@Entity
+@Table(name = "employees")
+public class Employee {
+
+    @Id
+    @Column(name = "employee_id")
+    private Long id;
+
+    @Column(name = "employee_name")
+    private String name;
+
+    private String email;
+    private String salary;
+}
+```
+
+`@Column` permite indicar explícitamente el **nombre de la columna** correspondiente en la base de datos.
+
+**Idea principal:**
+
+> La Entity representa los datos que se almacenan en la base de datos.
+
+---
+
+# DTO (Data Transfer Object)
+
+Un **DTO (Data Transfer Object)** es un objeto utilizado para **transportar los datos que necesitamos enviar o recibir** entre diferentes partes de nuestra aplicación.
+
+No es necesario enviar todos los datos de una Entity.
+
+Por ejemplo, si `Employee` tiene:
+
+```text
+id
+name
+email
+salary
+address
+phone
+```
+
+Podemos crear un DTO que solamente necesite:
+
+```java
+public record EmployeeDTO(
+    String name,
+    String email
+) {}
+```
+
+Entonces una petición puede enviar solamente:
+
+```json
+{
+    "name": "Juan",
+    "email": "juan@email.com"
+}
+```
+
+En lugar de enviar todos los campos de la Entity.
+
+**Idea principal:**
+
+> La Entity representa los datos de la base de datos, mientras que el DTO define los datos que queremos **transferir**.
