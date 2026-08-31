@@ -1,22 +1,3 @@
-# JPA (Java Persistence API)
-
-## 1. ¿Qué es JPA?
-
-**JPA (Java Persistence API)** es una **especificación de Java** que define cómo trabajar con bases de datos relacionales utilizando objetos Java.
-
-Su objetivo principal es facilitar el almacenamiento, consulta, actualización y eliminación de objetos Java en una base de datos.
-
-En otras palabras:
-
-```text
-Objetos Java  <----->  Tablas de Base de Datos
-```
-
-Esta técnica se conoce como:
-
-**ORM (Object-Relational Mapping)**
-
----
 
 ## 2. ¿Qué significa Persistence?
 
@@ -52,21 +33,7 @@ ID    NAME    EMAIL
 ```
 
 ---
-# Hibernate
 
-**Hibernate** es una implementación de **JPA** que se encarga de realizar realmente la comunicación entre los objetos Java y la base de datos.
-
-Mientras **JPA define las reglas**, **Hibernate las implementa**.
-
-```text
-JPA
- ↓
-Define cómo trabajar con la persistencia
-
-Hibernate
- ↓
-Implementa esas reglas y se comunica con la base de datos
-```
 # Controller
 
 Un **Controller (controlador)** es una clase encargada de recibir y procesar las **peticiones HTTP** que llegan a nuestra aplicación.
@@ -400,57 +367,55 @@ En lugar de enviar todos los campos de la Entity.
 
 > La Entity representa los datos de la base de datos, mientras que el DTO define los datos que queremos **transferir**.
 
-# Relación entre conceptos
+# JPA (Java Persistence API)
+
+## 1. ¿Qué es JPA?
+
+**JPA (Java Persistence API)** es una **especificación de Java** que define cómo trabajar con bases de datos relacionales utilizando objetos Java.
+
+Su objetivo principal es facilitar el almacenamiento, consulta, actualización y eliminación de objetos Java en una base de datos.
+
+En otras palabras:
 
 ```text
-                         PETICIÓN HTTP
-                              │
-                              ▼
-                    ┌─────────────────┐
-                    │    Controller   │
-                    │ @RestController │
-                    └────────┬────────┘
-                             │
-                             │ DTO
-                             ▼
-                    ┌─────────────────┐
-                    │     Service     │
-                    │   @Service      │
-                    └────────┬────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │   Repository    │
-                    │ JpaRepository   │
-                    └────────┬────────┘
-                             │
-                             ▼
-                         JPA
-                             │
-                             ▼
-                       Hibernate
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │   Base de Datos │
-                    │                 │
-                    │  ┌───────────┐  │
-                    │  │  EMPLOYEE │  │
-                    │  └───────────┘  │
-                    └────────┬────────┘
-                             │
-                             │
-                       representa
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │     Entity      │
-                    │    Employee     │
-                    │                 │
-                    │ @Entity         │
-                    │ @Table          │
-                    │ @Column         │
-                    └─────────────────┘
+Objetos Java  <----->  Tablas de Base de Datos
+```
+
+Esta técnica se conoce como:
+
+**ORM (Object-Relational Mapping)**
+
+---
+# Hibernate
+
+**Hibernate** es una implementación de **JPA** que se encarga de realizar realmente la comunicación entre los objetos Java y la base de datos.
+
+Mientras **JPA define las reglas**, **Hibernate las implementa**.
+
+Por ejemplo, JPA define cómo debe funcionar el mapeo entre una clase Java y una tabla de la base de datos, mientras que Hibernate se encarga de realizar ese trabajo en la práctica.
+
+---
+
+# Flujo desde el Controller hasta la Base de Datos
+
+Cuando llega una petición a nuestra aplicación, normalmente tenemos un flujo parecido a este:
+
+```text
+Cliente
+   ↓
+Controller
+   ↓
+Service
+   ↓
+IUsuarioRepository
+   ↓
+Spring Data JPA
+   ↓
+Hibernate
+   ↓
+JDBC
+   ↓
+Base de datos
 ```
 
 ## Resumen de cada concepto
