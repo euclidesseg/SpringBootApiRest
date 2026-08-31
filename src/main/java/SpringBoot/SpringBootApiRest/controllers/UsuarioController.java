@@ -1,6 +1,7 @@
 package SpringBoot.SpringBootApiRest.controllers;
 
 
+import SpringBoot.SpringBootApiRest.DTOs.UsuarioRequestDTO;
 import SpringBoot.SpringBootApiRest.models.UsuarioModel;
 import SpringBoot.SpringBootApiRest.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class UsuarioController {
     // postMapin solo es el nombre de lo que hara la peticion
     // El requestBody indica por donde se van a enviar el objeto que se guardara
     @PostMapping()
-    public UsuarioModel setUsuario(@RequestBody UsuarioModel usuario){
+    public UsuarioModel setUsuario(@RequestBody UsuarioRequestDTO usuario){
         return usuarioService.agregarUsuario(usuario);
     }
 
@@ -68,6 +69,7 @@ public class UsuarioController {
 
 // Nota: para enviar el recuestBody de un usuario que tiene una entidad relacional en la api
 // se hace de la siguienet manera tomando como ejemplo el proyecto actual y el controlador de usuarios
+// tambien podemos crear un DTO para en la peticion sneivar solo enviar id;
 
 /*  {
         "nombre": "Euclides",
@@ -83,3 +85,14 @@ public class UsuarioController {
         }
     }
 */
+/* Con DTO
+ * {
+    "nombre": "Elcy",
+    "apellido": "Perez",
+    "edad": 26,
+    "email": "elcy@gmail.com",
+    "prioridad": 1,
+    "paisId": 5,
+    "estadoId": 1818
+}
+* */

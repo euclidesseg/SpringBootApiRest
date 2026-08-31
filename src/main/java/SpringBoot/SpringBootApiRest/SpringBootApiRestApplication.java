@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringBootApiRestApplication {
 
 	public static void main(String[] args) {
-		System.out.println("Bienvenido a Spring boot");
+		System.out.println("Bienvenido a Spring Boot");
 		SpringApplication.run(SpringBootApiRestApplication.class, args);
 	}
 

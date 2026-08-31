@@ -10,7 +10,7 @@ public class EstadoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Long id;
+    private long id;
     private String nombre;
 
     @ManyToOne
